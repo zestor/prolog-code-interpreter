@@ -1,4 +1,4 @@
-# Prolog Interpreter Tool with OpenAI-Assisted Rule Conversion
+# LLM Prolog Code Interpreter Tool
 
 ## Overview
 This project leverages natural language processing and logic programming by dynamically converting human-readable business rules into Prolog code. It then uses the Prolog engine (via pyswip) to validate and query these rules. The conversion process is powered by the OpenAI large language models (LLMs), which translate natural language descriptions both for generating appropriate Prolog predicates and for formulating queries based on test case descriptions.
