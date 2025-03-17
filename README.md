@@ -59,14 +59,26 @@ Below are extra installation instructions for setting up SWI-Prolog on different
 
 ### Linux (Debian/Ubuntu-based):
 
-- Update your package lists: sudo apt-get update
+- Update your package lists:
+```
+sudo apt-get update
+```
 - Install SWI-Prolog: sudo apt-get install swi-prolog
-- Verify the installation: swipl --version
+- Verify the installation:
+```
+swipl --version
+```
 - For other distributions (e.g., Fedora, CentOS):
 
-### Fedora: sudo dnf install swi-prolog
+### Fedora: 
+```
+sudo dnf install swi-prolog
+```
 
-### CentOS/RedHat: sudo yum install swi-prolog (If not available via yum/dnf, refer to your distro’s repository or build from source.)
+### CentOS/RedHat: 
+```
+sudo yum install swi-prolog (If not available via yum/dnf, refer to your distro’s repository or build from source.)
+```
 
 ### Windows:
 
@@ -75,7 +87,10 @@ Below are extra installation instructions for setting up SWI-Prolog on different
 - Run the installer and follow the setup instructions.
 - Once installed, add the SWI-Prolog “bin” directory to your system’s PATH if the installer hasn’t done so automatically. This ensures that pyswip can locate the SWI-Prolog executable.
 - To modify the PATH environment variable, search for “Environment Variables” in the Windows start menu, then under System Properties, click on “Environment Variables...” and edit the “Path” variable to include the path to SWI-Prolog (e.g., C:\Program Files\swipl\bin).
-- Verify the installation by opening Command Prompt and running: swipl --version
+- Verify the installation by opening Command Prompt and running:
+```
+swipl --version
+```
 
 ## After Installing SWI-Prolog
 
