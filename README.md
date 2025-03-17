@@ -77,9 +77,7 @@ Once installed, add the SWI-Prolog “bin” directory to your system’s PATH i
 To modify the PATH environment variable, search for “Environment Variables” in the Windows start menu, then under System Properties, click on “Environment Variables...” and edit the “Path” variable to include the path to SWI-Prolog (e.g., C:\Program Files\swipl\bin).
 Verify the installation by opening Command Prompt and running: swipl --version
 
-────────────────────────────────────────────────────────────
 ## After Installing SWI-Prolog
-────────────────────────────────────────────────────────────
 
 Ensure you can run SWI-Prolog from your command line (Terminal, Command Prompt, etc.) using the command "swipl".
 pyswip will rely on the SWI-Prolog executable being available in your PATH. If you encounter issues with pyswip not finding Prolog, double-check your PATH settings.
