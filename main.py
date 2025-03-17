@@ -65,7 +65,7 @@ class PrologInterpreterTool:
         )
         
         try:
-            prolog_code = self.call_openai(prompt, model="o3-mini")
+            prolog_code = self.call_openai(prompt)
             # Clean up any markdown triple-backticks if present.
             filtered_lines = [line for line in prolog_code.splitlines() if not line.strip().startswith("```")]
             prolog_code = "\n".join(filtered_lines).strip()
@@ -108,7 +108,7 @@ class PrologInterpreterTool:
             f"English description: {english_query}"
         )
         
-        prolog_query = self.call_openai(prompt, model="gpt-4o")
+        prolog_query = self.call_openai(prompt)
         # Clean up any markdown formatting if present.
         filtered_lines = [line for line in prolog_query.splitlines() if not line.strip().startswith("```")]
         prolog_query = "\n".join(filtered_lines).strip()
