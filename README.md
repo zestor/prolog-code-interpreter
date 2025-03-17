@@ -72,7 +72,10 @@ swipl --version
 ```
 sudo apt-get update
 ```
-- Install SWI-Prolog: sudo apt-get install swi-prolog
+- Install SWI-Prolog:
+```
+sudo apt-get install swi-prolog
+```
 - Verify the installation:
 ```
 swipl --version
