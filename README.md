@@ -11,10 +11,6 @@ This project leverages natural language processing and logic programming by dyna
 - Execution of Prolog queries with result handling and error reporting.
 - Integration with OpenAI’s chat completion API for advanced summarization and rule translation.
 
-## Project Structure
-- main.py        Main entry point of the application containing the PrologInterpreterTool class and demonstration examples.
-- README.md      This file with comprehensive project documentation.
-
 ## Dependencies
 - Python 3.7+
 - openai (Python package) – For LLM interactions with OpenAI’s API.
