@@ -53,9 +53,18 @@ Below are extra installation instructions for setting up SWI-Prolog on different
 
 ### MacOS:
 
-- Install Homebrew if you haven’t already. Open the Terminal and run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-- Use Homebrew to install SWI-Prolog: brew install swi-prolog
-- Verify the installation by running: swipl --version
+- Install Homebrew if you haven’t already. Open the Terminal and run:
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+- Use Homebrew to install SWI-Prolog:
+```
+brew install swi-prolog
+```
+- Verify the installation by running:
+```
+swipl --version
+```
 
 ### Linux (Debian/Ubuntu-based):
 
