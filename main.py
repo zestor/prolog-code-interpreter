@@ -126,20 +126,23 @@ class PrologInterpreterTool:
             print("Error executing query:", e)
             return []
 
-    def get_english_answer(self, query, prolog_query, prolog_results):
+    def get_english_answer(self, rules, query, prolog_query, prolog_results):
+        # included the original english rules as parameter but excluded from the prompt
+        # so there would be no confusion where the answer comes from
+        # you can include them as reference if you want to give policy context
         prompt = f"Given this english query, and associated prolog interpretation along with prolog answer. Give an english answer to the question based on the prolog results without mentioning any system internals on how the answer was derived using prolog.\n\nEnglish query:\n{query}\n\nProlog Query:\n{prolog_query}\n\nProlog Results:\n{prolog_results}"
         return self.call_openai(prompt)
 
     def clean_up(self):
         os.remove(self.pl_file)
 
-    def print_answer(self,query):
+    def print_answer(self,rules,query):
         print("\n[QUESTION]:", query)
         prolog_query = self.convert_english_query_to_prolog(query)
         print("\n[INFO] Executing Prolog query:", prolog_query)
         prolog_results = self.query(prolog_query)
         print("\n[INFO] Prolog results:", prolog_results)
-        answer = self.get_english_answer(query, prolog_query, prolog_results)
+        answer = self.get_english_answer(rules, query, prolog_query, prolog_results)
         print("\n[FINAL ANSWER] ")
         print(answer)
 
@@ -165,7 +168,7 @@ def main():
     "last name, and date of birth information, and that they are on the same flights and cabin. "
     "Return the query to check for valid passengers."
     )
-    tool.print_answer(query)
+    tool.print_answer(sample_rules_text, query)
 
     print("*" * 80)
     print("Example 2:")
@@ -173,7 +176,7 @@ def main():
     "Check that a reservation that uses 0 travel certificates, 1 credit card, and 2 gift cards "
     "is valid according to the payment rules."
     )
-    tool.print_answer(query)
+    tool.print_answer(sample_rules_text, query)
 
     print("*" * 80)
     print("Example 3:")
@@ -181,7 +184,7 @@ def main():
     "Determine the baggage fee for a silver member traveling as an economy passenger who has booked 4 checked bags "
     "according to the baggage rules."
     )
-    tool.print_answer(query)
+    tool.print_answer(sample_rules_text, query)
 
     print("*" * 80)
     print("Example 4:")
@@ -192,7 +195,7 @@ def main():
     "and that for a silver member traveling in Economy, booking total of 5 checked bags, "
     "Return the combined query to check for valid passengers, valid payment, and the proper baggage fee."
     )
-    tool.print_answer(query)
+    tool.print_answer(sample_rules_text, query)
 
     print("*" * 80)
     print("Example 5:")
@@ -208,7 +211,7 @@ def main():
     "and that for a regular member traveling in Business, booking total of 6 checked bags, "
     "Return the combined query to check for valid passengers, valid payment, and the proper baggage fee."
     )
-    tool.print_answer(query)
+    tool.print_answer(sample_rules_text, query)
 
     tool.clean_up()
 
