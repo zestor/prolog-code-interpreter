@@ -119,13 +119,19 @@ class PrologInterpreterTool:
         Executes a Prolog query (provided as a string without the ending period)
         and returns a list of solutions found.
         """
-        print("\n[INFO] Executing Prolog query:", query_text)
         try:
             results = list(self.prolog.query(query_text))
             return results
         except Exception as e:
             print("Error executing query:", e)
             return []
+
+    def get_english_answer(self, query, prolog_query, prolog_results):
+        prompt = f"Given this english query, and associated prolog interpretation along with prolog answer. Give an english answer to the question based on the prolog results without mentioning any system internals on how the answer was derived using prolog.\n\nEnglish query:\n{query}\n\nProlog Query:\n{prolog_query}\n\nProlog Results:\n{prolog_results}"
+        return self.call_openai(prompt)
+
+    def clean_up(self):
+        os.remove(self.pl_file)
 
 def main():
 
@@ -142,66 +148,78 @@ def main():
     print("TEST CASES")
     print("" * 80)
 
-    print("Example 1: Passengers test case given in English.")
-    english_passengers_query = (
+    print("Example 1:")
+    query = (
     "Verify that a reservation with the following three passengers: "
     "John Doe (born 1990-01-01), Jane Doe (born 1991-02-02), and Alice Smith (born 1992-03-03) "
     "satisfies the rule that a reservation can include at most five passengers with complete first name, "
     "last name, and date of birth information, and that they are on the same flights and cabin. "
     "Return the query to check for valid passengers."
     )
-    print(english_passengers_query)
-    passengers_prolog_query = tool.convert_english_query_to_prolog(english_passengers_query)
-    passengers_results = tool.query(passengers_prolog_query)
-    print("\n[RESULT] Passengers Query Results:")
-    print(passengers_results)
+    print("\n[QUESTION]:", query)
+    prolog_query = tool.convert_english_query_to_prolog(query)
+    print("\n[INFO] Executing Prolog query:", prolog_query)
+    prolog_results = tool.query(prolog_query)
+    print("\n[INFO] Prolog results:", prolog_results)
+    answer = tool.get_english_answer(query, prolog_query, prolog_results)
+    print("\n[FINAL ANSWER] ")
+    print(answer)
 
     print("*" * 80)
 
-    print("Example 2: Payment test case given in English.")
-    english_payment_query = (
+    print("Example 2:")
+    query = (
     "Check that a reservation that uses 0 travel certificates, 1 credit card, and 2 gift cards "
     "is valid according to the payment rules."
     )
-    print(english_payment_query)
-    payment_prolog_query = tool.convert_english_query_to_prolog(english_payment_query)
-    payment_results = tool.query(payment_prolog_query)
-    print("\n[RESULT] Payment Query Results:")
-    print(payment_results)
+    print("\n[QUESTION]:", query)
+    prolog_query = tool.convert_english_query_to_prolog(query)
+    print("\n[INFO] Executing Prolog query:", prolog_query)
+    prolog_results = tool.query(prolog_query)
+    print("\n[INFO] Prolog results:", prolog_results)
+    answer = tool.get_english_answer(query, prolog_query, prolog_results)
+    print("\n[FINAL ANSWER] ")
+    print(answer)
 
     print("*" * 80)
 
-    print("Example 3: Baggage fee test case given in English.")
-    english_baggage_query = (
+    print("Example 3:.")
+    query = (
     "Determine the baggage fee for a silver member traveling as an economy passenger who has booked 4 checked bags "
     "according to the baggage rules."
     )
-    print(english_baggage_query)
-    baggage_prolog_query = tool.convert_english_query_to_prolog(english_baggage_query)
-    baggage_results = tool.query(baggage_prolog_query)
-    print("\n[RESULT] Baggage Fee Query Results:")
-    print(baggage_results)
+    print("\n[QUESTION]:", query)
+    prolog_query = tool.convert_english_query_to_prolog(query)
+    print("\n[INFO] Executing Prolog query:", prolog_query)
+    prolog_results = tool.query(prolog_query)
+    print("\n[INFO] Prolog results:", prolog_results)
+    answer = tool.get_english_answer(query, prolog_query, prolog_results)
+    print("\n[FINAL ANSWER] ")
+    print(answer)
 
     print("*" * 80)
 
-    print("Example 4: Positive (All rules satisfied)")
-    english_combined_positive_query = (
+    print("Example 4:")
+    query = (
     "Verify that a reservation with the following three passengers: "
     "Alice Johnson (born 1985-07-07), Bob Smith (born 1986-08-08), and Carol Danvers (born 1987-09-09) "
     "who are all booked on flight AA101 in Economy cabin, uses 0 travel certificates, 1 credit card, and 3 gift cards "
     "and that for a silver member traveling in Economy, booking total of 5 checked bags, "
     "Return the combined query to check for valid passengers, valid payment, and the proper baggage fee."
     )
-    print(english_combined_positive_query)
-    combined_positive_query = tool.convert_english_query_to_prolog(english_combined_positive_query)
-    combined_positive_results = tool.query(combined_positive_query)
-    print("\n[RESULT] Combined Positive Query Results:")
-    print(combined_positive_results)
+    print("\n[QUESTION]:", query)
+    prolog_query = tool.convert_english_query_to_prolog(query)
+    print("\n[INFO] Executing Prolog query:", prolog_query)
+    prolog_results = tool.query(prolog_query)
+    print("\n[INFO] Prolog results:", prolog_results)
+    answer = tool.get_english_answer(query, prolog_query, prolog_results)
+    print("\n[FINAL ANSWER] ")
+    print(answer)
 
     print("*" * 80)
 
-    print("Example 5: Negative (Multiple errors)")
-    english_combined_negative_query = (
+    print("Example 5:")
+    query = (
     "Check that a reservation with the following six passengers: "
     "   1) John Doe (born 1990-01-01), "
     "   2) Jane Doe (born 1991-02-02), "
@@ -213,11 +231,16 @@ def main():
     "and that for a regular member traveling in Business, booking total of 6 checked bags, "
     "Return the combined query to check for valid passengers, valid payment, and the proper baggage fee."
     )
-    print(english_combined_negative_query)
-    combined_negative_query = tool.convert_english_query_to_prolog(english_combined_negative_query)
-    combined_negative_results = tool.query(combined_negative_query)
-    print("\n[RESULT] Combined Negative Query Results:")
-    print(combined_negative_results)
+    print("\n[QUESTION]:", query)
+    prolog_query = tool.convert_english_query_to_prolog(query)
+    print("\n[INFO] Executing Prolog query:", prolog_query)
+    prolog_results = tool.query(prolog_query)
+    print("\n[INFO] Prolog results:", prolog_results)
+    answer = tool.get_english_answer(query, prolog_query, prolog_results)
+    print("\n[FINAL ANSWER] ")
+    print(answer)
+
+    tool.clean_up()
 
 if __name__ == "__main__":
     main()
