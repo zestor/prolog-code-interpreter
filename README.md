@@ -53,33 +53,33 @@ Below are extra installation instructions for setting up SWI-Prolog on different
 
 ### MacOS:
 
-Install Homebrew if you haven’t already. Open the Terminal and run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-Use Homebrew to install SWI-Prolog: brew install swi-prolog
-Verify the installation by running: swipl --version
+- Install Homebrew if you haven’t already. Open the Terminal and run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+- Use Homebrew to install SWI-Prolog: brew install swi-prolog
+- Verify the installation by running: swipl --version
 
 ### Linux (Debian/Ubuntu-based):
 
-Update your package lists: sudo apt-get update
-Install SWI-Prolog: sudo apt-get install swi-prolog
-Verify the installation: swipl --version
-For other distributions (e.g., Fedora, CentOS):
+- Update your package lists: sudo apt-get update
+- Install SWI-Prolog: sudo apt-get install swi-prolog
+- Verify the installation: swipl --version
+- For other distributions (e.g., Fedora, CentOS):
 
-Fedora: sudo dnf install swi-prolog
+### Fedora: sudo dnf install swi-prolog
 
-CentOS/RedHat: sudo yum install swi-prolog (If not available via yum/dnf, refer to your distro’s repository or build from source.)
+### CentOS/RedHat: sudo yum install swi-prolog (If not available via yum/dnf, refer to your distro’s repository or build from source.)
 
 ### Windows:
 
-Visit the official SWI-Prolog download page: https://www.swi-prolog.org/Download.html
-Download the Windows Installer (".exe" file) for the latest version.
-Run the installer and follow the setup instructions.
-Once installed, add the SWI-Prolog “bin” directory to your system’s PATH if the installer hasn’t done so automatically. This ensures that pyswip can locate the SWI-Prolog executable.
-To modify the PATH environment variable, search for “Environment Variables” in the Windows start menu, then under System Properties, click on “Environment Variables...” and edit the “Path” variable to include the path to SWI-Prolog (e.g., C:\Program Files\swipl\bin).
-Verify the installation by opening Command Prompt and running: swipl --version
+- Visit the official SWI-Prolog download page: https://www.swi-prolog.org/Download.html
+- Download the Windows Installer (".exe" file) for the latest version.
+- Run the installer and follow the setup instructions.
+- Once installed, add the SWI-Prolog “bin” directory to your system’s PATH if the installer hasn’t done so automatically. This ensures that pyswip can locate the SWI-Prolog executable.
+- To modify the PATH environment variable, search for “Environment Variables” in the Windows start menu, then under System Properties, click on “Environment Variables...” and edit the “Path” variable to include the path to SWI-Prolog (e.g., C:\Program Files\swipl\bin).
+- Verify the installation by opening Command Prompt and running: swipl --version
 
 ## After Installing SWI-Prolog
 
-Ensure you can run SWI-Prolog from your command line (Terminal, Command Prompt, etc.) using the command "swipl".
-pyswip will rely on the SWI-Prolog executable being available in your PATH. If you encounter issues with pyswip not finding Prolog, double-check your PATH settings.
-Once SWI-Prolog is installed correctly, you can use pyswip in your Python projects to consult and query Prolog code seamlessly.
-These detailed steps should help ensure that SWI-Prolog is installed on your system, allowing pyswip to function correctly within this project.
+- Ensure you can run SWI-Prolog from your command line (Terminal, Command Prompt, etc.) using the command "swipl".
+- pyswip will rely on the SWI-Prolog executable being available in your PATH. If you encounter issues with pyswip not finding Prolog, double-check your PATH settings.
+- Once SWI-Prolog is installed correctly, you can use pyswip in your Python projects to consult and query Prolog code seamlessly.
+- These detailed steps should help ensure that SWI-Prolog is installed on your system, allowing pyswip to function correctly within this project.
