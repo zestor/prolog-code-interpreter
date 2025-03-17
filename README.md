@@ -45,10 +45,10 @@ Run the main.py script:
  python main.py
 ```
 
-Below are extra installation instructions for setting up SWI-Prolog on different operating systems to work with pyswip:
 
 ────────────────────────────────────────────────────────────
 ## Prolog Installation Instructions
+Below are extra installation instructions for setting up SWI-Prolog on different operating systems to work with pyswip:
 ────────────────────────────────────────────────────────────
 
 ### MacOS:
