@@ -88,8 +88,9 @@ sudo dnf install swi-prolog
 
 ### CentOS/RedHat: 
 ```
-sudo yum install swi-prolog (If not available via yum/dnf, refer to your distro’s repository or build from source.)
+sudo yum install swi-prolog 
 ```
+Note: If not available via yum/dnf, refer to your distro’s repository or build from source.
 
 ### Windows:
 
