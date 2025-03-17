@@ -133,6 +133,16 @@ class PrologInterpreterTool:
     def clean_up(self):
         os.remove(self.pl_file)
 
+    def print_answer(self,query):
+        print("\n[QUESTION]:", query)
+        prolog_query = self.convert_english_query_to_prolog(query)
+        print("\n[INFO] Executing Prolog query:", prolog_query)
+        prolog_results = self.query(prolog_query)
+        print("\n[INFO] Prolog results:", prolog_results)
+        answer = self.get_english_answer(query, prolog_query, prolog_results)
+        print("\n[FINAL ANSWER] ")
+        print(answer)
+
 def main():
 
     # https://explorer.invariantlabs.ai/u/invariant/tau-bench_claude-3-5-sonnet/t/923
@@ -147,7 +157,6 @@ def main():
     print("" * 80)
     print("TEST CASES")
     print("" * 80)
-
     print("Example 1:")
     query = (
     "Verify that a reservation with the following three passengers: "
@@ -156,49 +165,25 @@ def main():
     "last name, and date of birth information, and that they are on the same flights and cabin. "
     "Return the query to check for valid passengers."
     )
-    print("\n[QUESTION]:", query)
-    prolog_query = tool.convert_english_query_to_prolog(query)
-    print("\n[INFO] Executing Prolog query:", prolog_query)
-    prolog_results = tool.query(prolog_query)
-    print("\n[INFO] Prolog results:", prolog_results)
-    answer = tool.get_english_answer(query, prolog_query, prolog_results)
-    print("\n[FINAL ANSWER] ")
-    print(answer)
+    tool.print_answer(query)
 
     print("*" * 80)
-
     print("Example 2:")
     query = (
     "Check that a reservation that uses 0 travel certificates, 1 credit card, and 2 gift cards "
     "is valid according to the payment rules."
     )
-    print("\n[QUESTION]:", query)
-    prolog_query = tool.convert_english_query_to_prolog(query)
-    print("\n[INFO] Executing Prolog query:", prolog_query)
-    prolog_results = tool.query(prolog_query)
-    print("\n[INFO] Prolog results:", prolog_results)
-    answer = tool.get_english_answer(query, prolog_query, prolog_results)
-    print("\n[FINAL ANSWER] ")
-    print(answer)
+    tool.print_answer(query)
 
     print("*" * 80)
-
-    print("Example 3:.")
+    print("Example 3:")
     query = (
     "Determine the baggage fee for a silver member traveling as an economy passenger who has booked 4 checked bags "
     "according to the baggage rules."
     )
-    print("\n[QUESTION]:", query)
-    prolog_query = tool.convert_english_query_to_prolog(query)
-    print("\n[INFO] Executing Prolog query:", prolog_query)
-    prolog_results = tool.query(prolog_query)
-    print("\n[INFO] Prolog results:", prolog_results)
-    answer = tool.get_english_answer(query, prolog_query, prolog_results)
-    print("\n[FINAL ANSWER] ")
-    print(answer)
+    tool.print_answer(query)
 
     print("*" * 80)
-
     print("Example 4:")
     query = (
     "Verify that a reservation with the following three passengers: "
@@ -207,17 +192,9 @@ def main():
     "and that for a silver member traveling in Economy, booking total of 5 checked bags, "
     "Return the combined query to check for valid passengers, valid payment, and the proper baggage fee."
     )
-    print("\n[QUESTION]:", query)
-    prolog_query = tool.convert_english_query_to_prolog(query)
-    print("\n[INFO] Executing Prolog query:", prolog_query)
-    prolog_results = tool.query(prolog_query)
-    print("\n[INFO] Prolog results:", prolog_results)
-    answer = tool.get_english_answer(query, prolog_query, prolog_results)
-    print("\n[FINAL ANSWER] ")
-    print(answer)
+    tool.print_answer(query)
 
     print("*" * 80)
-
     print("Example 5:")
     query = (
     "Check that a reservation with the following six passengers: "
@@ -231,14 +208,7 @@ def main():
     "and that for a regular member traveling in Business, booking total of 6 checked bags, "
     "Return the combined query to check for valid passengers, valid payment, and the proper baggage fee."
     )
-    print("\n[QUESTION]:", query)
-    prolog_query = tool.convert_english_query_to_prolog(query)
-    print("\n[INFO] Executing Prolog query:", prolog_query)
-    prolog_results = tool.query(prolog_query)
-    print("\n[INFO] Prolog results:", prolog_results)
-    answer = tool.get_english_answer(query, prolog_query, prolog_results)
-    print("\n[FINAL ANSWER] ")
-    print(answer)
+    tool.print_answer(query)
 
     tool.clean_up()
 
