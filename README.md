@@ -80,7 +80,6 @@ sudo apt-get install swi-prolog
 ```
 swipl --version
 ```
-- For other distributions (e.g., Fedora, CentOS):
 
 ### Fedora: 
 ```
