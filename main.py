@@ -29,10 +29,10 @@ class PrologInterpreterTool:
 
             if model.startswith("o1") or model.startswith("o3"):
                 arguments["response_format"] = {"type": "text"}
-                arguments["reasoning_effort"] = "high"
+                arguments["reasoning_effort"] = "medium"
         
             if model.startswith("gpt"):
-                arguments["max_tokens"] = 32000
+                arguments["max_tokens"] = 16000
 
             response = client.chat.completions.create(**arguments)
             return response.choices[0].message.content
@@ -65,7 +65,7 @@ class PrologInterpreterTool:
         )
         
         try:
-            prolog_code = self.call_openai(prompt)
+            prolog_code = self.call_openai(prompt, model="o3-mini")
             # Clean up any markdown triple-backticks if present.
             filtered_lines = [line for line in prolog_code.splitlines() if not line.strip().startswith("```")]
             prolog_code = "\n".join(filtered_lines).strip()
@@ -108,7 +108,7 @@ class PrologInterpreterTool:
             f"English description: {english_query}"
         )
         
-        prolog_query = self.call_openai(prompt)
+        prolog_query = self.call_openai(prompt, model="gpt-4o")
         # Clean up any markdown formatting if present.
         filtered_lines = [line for line in prolog_query.splitlines() if not line.strip().startswith("```")]
         prolog_query = "\n".join(filtered_lines).strip()
@@ -131,7 +131,7 @@ class PrologInterpreterTool:
         # so there would be no confusion where the answer comes from
         # you can include them as reference if you want to give policy context
         prompt = f"Given this english query, and associated prolog interpretation along with prolog answer. Give an english answer to the question based on the prolog results without mentioning any system internals on how the answer was derived using prolog.\n\nEnglish query:\n{query}\n\nProlog Query:\n{prolog_query}\n\nProlog Results:\n{prolog_results}"
-        return self.call_openai(prompt)
+        return self.call_openai(prompt, model="gpt-4o-mini")
 
     def clean_up(self):
         os.remove(self.pl_file)
